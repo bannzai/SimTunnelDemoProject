@@ -1,4 +1,7 @@
 # ローカル環境の絶対パスを含むため commit しない (local/simtunnel mcp-config が生成)
 .mcp.json
 
+# ローカル専用の指示ファイル
+CLAUDE.local.md
+
 xcuserdata/

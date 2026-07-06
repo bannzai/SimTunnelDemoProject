@@ -1,7 +1,5 @@
 # iOS Simulator セッションを張る caller workflow。実体は bannzai/simtunnel の session.yml（reusable workflow）。
 # 参照: https://github.com/bannzai/simtunnel の PROJECT.md「各アプリ repo での実行」
-# 起動例（simtunnel リポジトリの CLI から）:
-#   SIMTUNNEL_REPO=bannzai/SimTunnelDemoProject local/simtunnel up demo --wait
 name: simulator-session
 # run-name は local/simtunnel CLI が run を特定するキーのためこの形式を維持する
 run-name: "session=${{ inputs.session }} device=${{ inputs.device }}"
@@ -22,12 +20,12 @@ on:
         required: true
         default: "60"
 
-permissions:
-  id-token: write # Tailscale の OIDC (workload identity federation) 認証に必要
-  contents: read
-
 jobs:
   session:
+    # id-token: write が必要なのは reusable workflow を呼ぶこの job だけのため、job 単位で最小権限にする
+    permissions:
+      id-token: write # Tailscale の OIDC (workload identity federation) 認証に必要
+      contents: read
     # タグ運用はしないため main の commit SHA で固定する（更新時は SHA を書き換える）
     uses: bannzai/simtunnel/.github/workflows/session.yml@d6cac463063f8b556224e7e83423afc314586441 # main 2026-07-06
     with:
