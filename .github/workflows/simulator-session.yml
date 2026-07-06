@@ -29,7 +29,7 @@ permissions:
 jobs:
   session:
     # タグ運用はしないため main の commit SHA で固定する（更新時は SHA を書き換える）
-    uses: bannzai/simtunnel/.github/workflows/session.yml@51f3ecd4978ffe7052b09fb4d9d3dd4df09865a7 # main 2026-07-06
+    uses: bannzai/simtunnel/.github/workflows/session.yml@d6cac463063f8b556224e7e83423afc314586441 # main 2026-07-06
     with:
       session: ${{ inputs.session }}
       device: ${{ inputs.device }}
